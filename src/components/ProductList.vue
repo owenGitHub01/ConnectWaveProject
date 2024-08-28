@@ -29,13 +29,28 @@ const data = useShoppingStore();
 }
 
 /* Laptop screens */
-@media screen and (min-width:1200px){
+@media screen and (min-width:1200px){ 
+    * {
+    width: 95%;
+    margin: 0 auto;
+    }
     .laptop-display {
         display: grid;
         grid-template-columns: 1fr 1fr;
     }
     .laptop-d {
         width: 85%;
+    }
+}
+
+/* Monitor screens */
+@media screen and (min-width:1600px){
+    * {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .laptop-display {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 

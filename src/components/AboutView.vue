@@ -135,7 +135,6 @@ p {
   left: -16px;
 }
 
-
 @media screen and (max-width: 880px){
   .timeline {
     margin: 50px auto;
@@ -154,13 +153,16 @@ p {
   .text-box small {
     margin-bottom: 10px;
   }
-  .right-container {
-    left: 0;
-  }
   .left-arrow, .right-arrow {
     border-right: 15px solid #eee;
     border-left: 0;
     left: -16px;
+  }
+  .left-container {
+    left: 0;
+  }
+  .right-container {
+    left: 0;
   }
 }
 

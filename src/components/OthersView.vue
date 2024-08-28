@@ -6,7 +6,7 @@ const data = useShoppingStore();
 const numbers = ref([])
 let num = ref()
 
-for(let i = 0; i < 3; i++){
+for(let i = 0; i < 8; i++){
   do {
     num.value = Math.round(Math.random() * data.products.length)
   }
@@ -31,10 +31,6 @@ for(let i = 0; i < 3; i++){
     </div>
   </div>
 </template>
-
-<script setup> 
-
-</script>
 
 <style scoped>
 
@@ -70,6 +66,7 @@ h1 {
 
 .plan-h1 {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 28px;
 }
 
 .plan-p {

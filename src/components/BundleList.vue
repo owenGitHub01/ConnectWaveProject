@@ -39,4 +39,12 @@ const data = useShoppingStore();
     }
 }
 
+/* Monitor screens */
+@media screen and (min-width:1600px){
+    .laptop-display {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
 </style>
