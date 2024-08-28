@@ -26,7 +26,6 @@ import GooglePixelTab from '../images/Devices/ConnectWave-GooglePixelTab.png'
 import GooglePixel8a from '../images/Devices/ConnectWave-GooglePixel8a.png'
 import AsusVivobookS from '../images/Devices/ConnectWave-AsusVivobookS.png'
 
-
 import { defineStore } from 'pinia'
 import Swal from 'sweetalert2'
 
@@ -47,7 +46,7 @@ export const useShoppingStore = defineStore('shopping', {
                     service: 'Face ID',
                     storage: [
                         { num: 1, stores: "128 GB", cost: 0 },
-                        { num: 2, stores: "256 GB", cost: 100 },
+                        { num: 2, stores: "256 GB", cost: 101 },
                         { num: 3, stores: "512 GB", cost: 149 }
                     ],
                 },
@@ -131,7 +130,7 @@ export const useShoppingStore = defineStore('shopping', {
                     service: 'Fingerprint ID',
                     storage: [
                         { num: 1, stores: "512 GB", cost: 0 },
-                        { num: 2, stores: "1 TB", cost: 100 },
+                        { num: 2, stores: "1 TB", cost: 101 },
                         { num: 3, stores: "2 TB", cost: 199 },
                     ],
                 },
@@ -300,7 +299,7 @@ export const useShoppingStore = defineStore('shopping', {
 
             bundles: [
                 {
-                    id: 17,
+                    id: 1,
                     name: "Keep it Apple",
                     bio: 'Enjoy a brand new iPad pro and a iPhone 15 in our Keep it Apple deal, saving a huge 20% off!',
                     price: 1359,
@@ -327,7 +326,7 @@ export const useShoppingStore = defineStore('shopping', {
                     ],
                 },
                 {
-                    id: 18,
+                    id: 2,
                     name: "Galaxy Bundle",
                     bio: 'Our Galaxy bundle comes with a whopping 25% off. What are you waiting for?',
                     price: 1499,
@@ -354,7 +353,7 @@ export const useShoppingStore = defineStore('shopping', {
                     ],
                 },
                 {
-                    id: 19,
+                    id: 3,
                     name: "Mix and Match",
                     bio: 'Try our mix and match bundle with has great value!',
                     price: 253,
@@ -381,7 +380,7 @@ export const useShoppingStore = defineStore('shopping', {
                     ],
                 },
                 {
-                    id: 20,
+                    id: 4,
                     name: "Google Bundle",
                     bio: "Stick to Google's devices with our Google bundle having 25% off!",
                     price: 524,
@@ -408,7 +407,7 @@ export const useShoppingStore = defineStore('shopping', {
                     ],
                 },
                 {
-                    id: 21,
+                    id: 5,
                     name: "Air Bundle",
                     bio: "In this bundle enjoy 2 of our most popular devices, for an even cheaper bundle price.",
                     price: 1879,
@@ -435,7 +434,7 @@ export const useShoppingStore = defineStore('shopping', {
                     ],
                 },
                 {
-                    id: 22,
+                    id: 6,
                     name: "Pro Kit",
                     bio: "Enjoy a 15% off on the best of the best with our Pro kit.",
                     price: 2055,
@@ -541,40 +540,57 @@ export const useShoppingStore = defineStore('shopping', {
         }
     },
     actions: {
-        addToCart(item) {
-            let index = this.cartItems.findIndex(product => product.id === item.id);
-            if (index !== -1) {
-                this.products[index].quantity += 1;
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Your item has been updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            } else {
-                item.quantity = 1;
-                this.cartItems.push(item);
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Your item has been saved',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+        addToCart(id, name, price, type) {
+            var pos = parseInt(id)
+            let catorgory = type === "device" ? this.products : this.bundles
+
+            //Check if item has been saved previously
+            for (let i = 0; i < this.cartItems.length; i++) {
+                let customName = `Custom ${name}`
+                if (this.cartItems[i].name === name && this.cartItems[i].price === price
+                    || this.cartItems[i].name === customName && this.cartItems[i].price === price) {
+                    this.cartItems[i].quantity++
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: name + ' Has Been Updated',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                    return
+                }
             }
+
+            //Check If Item is custom or standard
+            if (catorgory[pos].price == price) {
+                this.cartItems.push({
+                    id: id,
+                    name: name,
+                    price: price,
+                    quantity: 1
+                })
+            }
+            else {
+                this.cartItems.push({
+                    id: Math.floor(Math.random() * 100),
+                    name: "Custom " + name,
+                    price: price,
+                    quantity: 1
+                })
+            }
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: name + ' Has Been Added To Your Cart',
+                showConfirmButton: false,
+                timer: 1000
+            });
         },
+
         incrementQ(item) {
             let index = this.cartItems.findIndex(product => product.id === item.id);
             if (index !== -1) {
                 this.cartItems[index].quantity += 1;
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Your item has been updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
             }
         },
         decrementQ(item) {
@@ -584,24 +600,11 @@ export const useShoppingStore = defineStore('shopping', {
                 if (this.cartItems[index].quantity === 0) {
                     this.cartItems = this.cartItems.filter(product => product.id !== item.id);
                 }
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Your item has been updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
             }
         },
         removeFromCart(item) {
             this.cartItems = this.cartItems.filter(product => product.id !== item.id);
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Your item has been removed',
-                showConfirmButton: false,
-                timer: 1500
-            });
+
         }
 
     },

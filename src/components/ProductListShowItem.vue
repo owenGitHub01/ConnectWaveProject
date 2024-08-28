@@ -1,5 +1,8 @@
 
 <script setup>
+
+let type = "device"
+
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
 
@@ -103,13 +106,13 @@ let sizePar = sizeCheck()
     <h2 class="order-h2">£{{ (realPrice / 12).toFixed(2) }}/mo based on 12mo</h2>
     
     <button 
-    @click="data.addToCart(activeData)"
+    @click="data.addToCart(position, name, realPrice, type)"
     class="-btn">
     <i class="bi bi-cart-check"></i> Add To Cart
     </button>
   </div>
 </template>
-
+ 
 <style scoped>
 * {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

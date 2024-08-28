@@ -8,6 +8,7 @@ const props = defineProps({
 });
 const data = useShoppingStore();
 
+let type = "bundle"
 </script>
 
 <template>
@@ -24,7 +25,7 @@ const data = useShoppingStore();
         </div>
         <div class="-btn-div">
             <button 
-            @click="data.addToCart(product)"
+            @click="data.addToCart(bundle.id - 1, bundle.name, bundle.price, type)"
             class="-btn">
             <i class="bi bi-cart-check"></i> Add To Cart
         </button>
@@ -35,7 +36,6 @@ const data = useShoppingStore();
         </div>
     </div>
 </template> 
-
 
 <style scoped>
 

@@ -7,7 +7,7 @@
         }
     });
     const data = useShoppingStore();
-    console.log(name)
+    let type = "device"
 </script>
 
 <template>
@@ -25,12 +25,12 @@
         <h3 class="-title">{{product.name}}</h3>
         <h3 class="-bold">Prices start from £{{product.price}}</h3>
         <button 
-            @click="data.addToCart(product)"
+            @click="data.addToCart(product.id - 1, product.name, product.price, type)"
             class="-btn">
             <i class="bi bi-cart-check"></i> Add To Cart
         </button>
         <button class="-btn">
-        <router-link name="top" class="-btn2" :to="{name: 'ProductDetails', params: {id: product.id - 1} }">View</router-link>
+        <router-link name="top" class="-btn2" :to="{name: 'ProductDetails', params: {id: product.id - 1} }">Customise</router-link>
         </button>
     </div>
 </template>

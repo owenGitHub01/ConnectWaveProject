@@ -13,6 +13,9 @@ let bio = activeData[0].bio
 let price = activeData[0].price
 let type = activeData[0].devices
 
+
+let type11 = "bundle"
+
 </script>
 
 <template>
@@ -31,7 +34,7 @@ let type = activeData[0].devices
   
   <h3 class="-price2">£{{ price }}</h3>
   <button 
-  @click="data.addToCart(activeData[0])"
+  @click="data.addToCart(activeData[0].id - 1, name, price, type)"
   class="-btn">
   <i class="bi bi-cart-check"></i> Add To Cart
   </button>

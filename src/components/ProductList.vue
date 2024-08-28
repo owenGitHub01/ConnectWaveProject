@@ -7,7 +7,7 @@ const data = useShoppingStore();
 
 <template>
 <div className='product-div'>
-    <h1 class="-title">Pick a device, Style it to suit your needs</h1>
+    <h1 class="-title">Pick A Device, Style It To Suit Your Everyday Needs</h1>
     <div>
         <div class="laptop-display">            
             <ProductListItem class="laptop-d" v-for="product in data.products" 

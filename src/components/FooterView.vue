@@ -25,7 +25,7 @@
             <router-link class="-nav-link" to="/bundles">Bundles</router-link>
           </li>
           <li>
-            <router-link class="-nav-link" to="/cart">Cart</router-link>
+            <router-link class="-nav-link" to="/cart">Basket</router-link>
           </li>
         </ul>
     </div>
@@ -50,13 +50,13 @@
 .line {
   width: 80%;
   margin: 0 auto 2rem;
-  border: 1px solid black;
+  border: 1px solid rgb(125 211 252);
   height: 1px;
 }
 
 .main {
   margin: 3rem 0 5rem;
-}
+} 
 
 .-flex {
   margin: 1rem 0 2rem;
